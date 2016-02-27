@@ -1,0 +1,58 @@
+<idea-plugin version="3">
+    <id>com.nes.intellij.plugin.id</id>
+    <name>AllProjects</name>
+    <version>1.2</version>
+    <vendor email="serge.nes@gmail.com" url="https://github.com/sergenes">Sergey Nes</vendor>
+
+    <description><![CDATA[
+      This plugin helps you to track the time development of all your projects.<br>
+      <small>by Serge Nes</small>
+      ]]></description>
+
+    <change-notes><![CDATA[
+      Whats new:<br>
+      <small>- Added filter for each table column</small>
+      ]]>
+    </change-notes>
+
+    <!-- please see http://confluence.jetbrains.net/display/IDEADEV/Build+Number+Ranges for description -->
+    <idea-version since-build="107.105"/>
+
+    <!-- please see http://confluence.jetbrains.net/display/IDEADEV/Plugin+Compatibility+with+IntelliJ+Platform+Products
+         on how to target different products -->
+    <depends>com.intellij.modules.lang</depends>
+
+    <application-components>
+        <!-- Add your application components here -->
+        <component>
+            <implementation-class>com.nes.intellij.plugin.AllProjectsAppComponent</implementation-class>
+        </component>
+    </application-components>
+
+    <project-components>
+        <!-- Add your project components here -->
+        <component>
+            <implementation-class>com.nes.intellij.plugin.AllProjectsProjectComponent</implementation-class>
+        </component>
+    </project-components>
+
+    <actions>
+        <!--<group id="MyPlugin.SampleMenu" text="_Sample Menu" description="Sample menu">-->
+        <!--<add-to-group group-id="MainMenu" anchor="last"  />-->
+        <!--<action id="Myplugin.Textboxes" class="com.example.intellij.plugin.TestA" text="Text _Boxes" description="A test menu item" />-->
+        <!--</group>-->
+        <action id="Plugin.AllProjects"
+                class="com.nes.intellij.plugin.AllProjects"
+                text="AllProjects"
+                description="This plugin helps you to track the time development of all your projects."
+                icon="/icons/icon.png">
+        </action>
+    </actions>
+
+    <extensions defaultExtensionNs="com.intellij">
+
+        <toolWindow id="AllProjects" icon="/icons/icon.png" anchor="bottom" factoryClass="com.nes.intellij.plugin.ui.AllProjectsToolWindowFactory">
+
+        </toolWindow>
+    </extensions>
+</idea-plugin>
