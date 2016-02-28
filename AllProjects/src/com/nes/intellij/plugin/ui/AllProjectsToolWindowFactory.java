@@ -156,7 +156,7 @@ public class AllProjectsToolWindowFactory implements ToolWindowFactory {
                             if (comboBoxLabel.getSelectedIndex() == 2 && !lineArray[3].toLowerCase().contains(filter.toLowerCase()))
                                 continue;
                         }
-                        table_model.add(new ProjectData(lineArray[1], lineArray[4], lineArray[3]));
+                        table_model.insert(0, new ProjectData(lineArray[1], lineArray[4], lineArray[3]));
                     }
                 }
                 rd.close();
