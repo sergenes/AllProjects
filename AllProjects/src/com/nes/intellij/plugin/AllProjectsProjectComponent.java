@@ -10,6 +10,7 @@ import com.intellij.util.messages.MessageBusConnection;
 import org.apache.commons.lang.time.FastDateFormat;
 import org.jetbrains.annotations.NotNull;
 
+import java.io.File;
 import java.io.FileWriter;
 import java.io.PrintWriter;
 import java.util.List;
@@ -68,7 +69,7 @@ public class AllProjectsProjectComponent implements ProjectComponent, BulkFileLi
 
         String userHome = System.getProperty("user.home");
         try {
-            PrintWriter output = new PrintWriter(new FileWriter(userHome+"/idea.prj.txt", true));
+            PrintWriter output = new PrintWriter(new FileWriter(userHome + "/idea.prj.txt", true));
 
             output.printf("O, %s, %d\r\n", pluginName, System.currentTimeMillis());
 
@@ -86,7 +87,7 @@ public class AllProjectsProjectComponent implements ProjectComponent, BulkFileLi
 
         String userHome = System.getProperty("user.home");
         try {
-            PrintWriter output = new PrintWriter(new FileWriter(userHome+"/idea.prj.txt", true));
+            PrintWriter output = new PrintWriter(new FileWriter(userHome + "/idea.prj.txt", true));
 
             output.printf("C, %s, %d\r\n", pluginName, System.currentTimeMillis());
 
@@ -99,15 +100,15 @@ public class AllProjectsProjectComponent implements ProjectComponent, BulkFileLi
 
     @Override
     public void before(@NotNull List<? extends VFileEvent> vFileEvents) {
-//        for (VFileEvent fe : vFileEvents) {
-//            if(fe.getFile()!=null  && fe.getFile().getCanonicalPath()!=null && fe.getFile().getCanonicalPath().contains(_project.getName())){
-//                System.out.println("before(getCanonicalPath)->" + fe.getFile().getCanonicalPath());
-//
-//                System.out.println("before(getName)->" + fe.getFile().getName());
-//                System.out.println("before(getLength)->" + fe.getFile().getLength());
-//            }
-//
-//        }
+        for (VFileEvent fe : vFileEvents) {
+            if (fe.getFile() != null && fe.getFile().getCanonicalPath() != null && fe.getFile().getCanonicalPath().contains(_project.getName())) {
+                System.out.println("before(getCanonicalPath)->" + fe.getFile().getCanonicalPath());
+
+                System.out.println("before(getName)->" + fe.getFile().getName());
+                System.out.println("before(getLength)->" + fe.getFile().getLength());
+            }
+
+        }
     }
 
     @Override
@@ -121,8 +122,13 @@ public class AllProjectsProjectComponent implements ProjectComponent, BulkFileLi
 //                    System.out.println("after(getLength)->" + fe.getFile().getLength());
 
                     String userHome = System.getProperty("user.home");
+
+                   // File f = new File(userHome + "/idea.prj.txt");
+
+                    //if(f.exists() && f.length() > )
+
                     try {
-                        PrintWriter output = new PrintWriter(new FileWriter(userHome+"/idea.prj.txt", true));
+                        PrintWriter output = new PrintWriter(new FileWriter(userHome + "/idea.prj.txt", true));
                         if (fe.getFile() != null) {
                             String date = FastDateFormat.getInstance("dd-MM-yyyy HH:mm:ss").format(fe.getFile().getTimeStamp());
                             output.printf("M, %s, %d, %s, %s, [%s]\r\n", _project.getName(), fe.getFile().getTimeStamp(), date, fe.getFile().getName(), fe.getFile().getCanonicalPath());

@@ -1,7 +1,7 @@
 <idea-plugin version="3">
     <id>com.nes.intellij.plugin.id</id>
     <name>AllProjects</name>
-    <version>1.2</version>
+    <version>1.4</version>
     <vendor email="serge.nes@gmail.com" url="https://github.com/sergenes">Sergey Nes</vendor>
 
     <description><![CDATA[
@@ -11,7 +11,9 @@
 
     <change-notes><![CDATA[
       Whats new:<br>
-      <small>- Added filter for each table column</small>
+      <small>- Fixed sort by date</small>
+      <small>- Improved filter</small>
+      <small>- Added, the time calculation for two selected rows</small>
       ]]>
     </change-notes>
 
