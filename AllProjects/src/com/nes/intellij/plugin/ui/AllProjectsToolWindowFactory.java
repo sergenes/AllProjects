@@ -13,6 +13,7 @@ import com.nes.intellij.plugin.ui.model.ColumnData;
 import com.nes.intellij.plugin.ui.model.ProjectData;
 import com.nes.intellij.plugin.ui.model.ProjectTableModel;
 import org.joda.time.DateTime;
+import org.joda.time.Period;
 import org.joda.time.format.DateTimeFormat;
 import org.joda.time.format.DateTimeFormatter;
 
@@ -104,14 +105,12 @@ public class AllProjectsToolWindowFactory implements ToolWindowFactory {
                     DateTime timeFirst = formatter.parseDateTime(timeFirstStr.trim());
                     DateTime timeLast = formatter.parseDateTime(timeLastStr.trim());
 
-                    long delta = timeFirst.minus(timeLast.getMillis()).getMillis();
-
-                    DateTime jodaTime = new DateTime(delta);
+                    Period diff = new Period(timeFirst, timeLast);
 
                     if (table.getSelectedRowCount() < 2) {
                         totalSelectedTime.setText("Not selected");
                     } else {
-                        totalSelectedTime.setText(String.format("Estimated Time: %02d:%02d", jodaTime.getHourOfDay(), jodaTime.getMinuteOfHour()));
+                        totalSelectedTime.setText(String.format("Estimated Time: %02d:%02d", Math.abs(diff.getHours()), Math.abs(diff.getMinutes())));
                     }
                 } else {
                     totalSelectedTime.setText("Not selected");

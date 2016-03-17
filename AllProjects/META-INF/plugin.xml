@@ -1,7 +1,7 @@
 <idea-plugin version="3">
     <id>com.nes.intellij.plugin.id</id>
     <name>AllProjects</name>
-    <version>1.4</version>
+    <version>1.6</version>
     <vendor email="serge.nes@gmail.com" url="https://github.com/sergenes">Sergey Nes</vendor>
 
     <description><![CDATA[
