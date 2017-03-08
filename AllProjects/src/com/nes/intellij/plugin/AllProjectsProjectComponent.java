@@ -10,7 +10,6 @@ import com.intellij.util.messages.MessageBusConnection;
 import org.apache.commons.lang.time.FastDateFormat;
 import org.jetbrains.annotations.NotNull;
 
-import java.io.File;
 import java.io.FileWriter;
 import java.io.PrintWriter;
 import java.util.List;
@@ -100,15 +99,15 @@ public class AllProjectsProjectComponent implements ProjectComponent, BulkFileLi
 
     @Override
     public void before(@NotNull List<? extends VFileEvent> vFileEvents) {
-        for (VFileEvent fe : vFileEvents) {
-            if (fe.getFile() != null && fe.getFile().getCanonicalPath() != null && fe.getFile().getCanonicalPath().contains(_project.getName())) {
-                System.out.println("before(getCanonicalPath)->" + fe.getFile().getCanonicalPath());
+//        for (VFileEvent fe : vFileEvents) {
+//            if (fe.getFile() != null && fe.getFile().getCanonicalPath() != null && fe.getFile().getCanonicalPath().contains(_project.getName())) {
+//                System.out.println("before(getCanonicalPath)->" + fe.getFile().getCanonicalPath());
+//
+//                System.out.println("before(getName)->" + fe.getFile().getName());
+//                System.out.println("before(getLength)->" + fe.getFile().getLength());
+//            }
 
-                System.out.println("before(getName)->" + fe.getFile().getName());
-                System.out.println("before(getLength)->" + fe.getFile().getLength());
-            }
-
-        }
+//        }
     }
 
     @Override
@@ -117,16 +116,28 @@ public class AllProjectsProjectComponent implements ProjectComponent, BulkFileLi
             if (fe == null || fe.getFile() == null) continue;
 
             try {
-                if (fe.getFile().getCanonicalPath().contains(_project.getName()) && fe.getFile().getCanonicalPath().endsWith(".java")) {
+                String file = fe.getFile().getCanonicalPath();
+//                System.out.println("after(file)->" + file);
+                if (fe.getFile().getCanonicalPath().contains(_project.getName())
+                        && !file.endsWith("/BuildConfig.java")
+                        && !file.endsWith("/R.java")
+                        && ((file.endsWith("AndroidManifest.xml")
+                        || (file.endsWith(".xml") && file.contains("res/layout"))
+                        || file.endsWith(".gradle")
+                        || file.endsWith(".java")
+                        || file.endsWith(".py")
+                        || file.endsWith(".kt")
+                        || file.endsWith(".mm")
+                        || file.endsWith(".c")
+                        || file.endsWith(".cpp")
+                        || file.endsWith(".swift")
+                        || file.endsWith(".plist")
+                        || file.endsWith(".m")
+                        || file.endsWith(".h")))) {
+
 //                    System.out.println("after(getName)->" + fe.getFile().getName());
 //                    System.out.println("after(getLength)->" + fe.getFile().getLength());
-
                     String userHome = System.getProperty("user.home");
-
-                   // File f = new File(userHome + "/idea.prj.txt");
-
-                    //if(f.exists() && f.length() > )
-
                     try {
                         PrintWriter output = new PrintWriter(new FileWriter(userHome + "/idea.prj.txt", true));
                         if (fe.getFile() != null) {

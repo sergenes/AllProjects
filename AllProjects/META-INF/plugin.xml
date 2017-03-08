@@ -1,19 +1,19 @@
 <idea-plugin version="3">
     <id>com.nes.intellij.plugin.id</id>
     <name>AllProjects</name>
-    <version>1.6</version>
+    <version>1.7</version>
     <vendor email="serge.nes@gmail.com" url="https://github.com/sergenes">Sergey Nes</vendor>
 
     <description><![CDATA[
-      This plugin helps you to track the time development of all your projects.<br>
+      This plugin helps you to track the development time of all your projects.<br>
       <small>by Serge Nes</small>
       ]]></description>
 
     <change-notes><![CDATA[
       Whats new:<br>
-      <small>- Fixed sort by date</small>
-      <small>- Improved filter</small>
-      <small>- Added, the time calculation for two selected rows</small>
+      <small>- Fixed invisible table in new inteliJ</small>
+      <small>- Improved filter for ide system files</small>
+      <small>- Added, support for kotlin, PyCharm, and AppCode</small>
       ]]>
     </change-notes>
 
@@ -39,22 +39,17 @@
     </project-components>
 
     <actions>
-        <!--<group id="MyPlugin.SampleMenu" text="_Sample Menu" description="Sample menu">-->
-        <!--<add-to-group group-id="MainMenu" anchor="last"  />-->
-        <!--<action id="Myplugin.Textboxes" class="com.example.intellij.plugin.TestA" text="Text _Boxes" description="A test menu item" />-->
-        <!--</group>-->
         <action id="Plugin.AllProjects"
                 class="com.nes.intellij.plugin.AllProjects"
                 text="AllProjects"
-                description="This plugin helps you to track the time development of all your projects."
+                description="This plugin helps you to track the development time of all your projects."
                 icon="/icons/icon.png">
+            <add-to-group group-id="ProjectViewPopupMenu" anchor="after" relative-to-action="RevealIn"/>
         </action>
     </actions>
 
     <extensions defaultExtensionNs="com.intellij">
-
         <toolWindow id="AllProjects" icon="/icons/icon.png" anchor="bottom" factoryClass="com.nes.intellij.plugin.ui.AllProjectsToolWindowFactory">
-
         </toolWindow>
     </extensions>
 </idea-plugin>

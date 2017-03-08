@@ -8,6 +8,8 @@ import com.intellij.ui.components.JBLabel;
 import com.intellij.ui.components.JBScrollPane;
 import com.intellij.ui.components.JBTextField;
 import com.intellij.ui.components.panels.NonOpaquePanel;
+import com.intellij.ui.content.Content;
+import com.intellij.ui.content.ContentFactory;
 import com.intellij.ui.table.JBTable;
 import com.nes.intellij.plugin.ui.model.ColumnData;
 import com.nes.intellij.plugin.ui.model.ProjectData;
@@ -168,6 +170,7 @@ public class AllProjectsToolWindowFactory implements ToolWindowFactory {
     @Override
     public void createToolWindowContent(Project project, ToolWindow toolWindow) {
         makeTable();
+//        System.out.println("createToolWindowContent()->"+toolWindow.getTitle());
 
         totalSelectedTime = new JBLabel();
         totalSelectedTime.setText("Not selected");
@@ -197,10 +200,16 @@ public class AllProjectsToolWindowFactory implements ToolWindowFactory {
         filterPanel.add(searchField, BorderLayout.CENTER);
         filterPanel.add(rightPanel, BorderLayout.EAST);
 
-        Component component = toolWindow.getComponent();
+//        final Component component = toolWindow.getComponent();
 
-        component.getParent().add(filterPanel, BorderLayout.NORTH);
-        component.getParent().add(sp, BorderLayout.CENTER);
+        JPanel panel = new JPanel();
+        panel.setLayout(new BorderLayout());
+
+        panel.add(filterPanel, BorderLayout.NORTH);
+        panel.add(sp, BorderLayout.CENTER);
+
+//        component.getParent().add(filterPanel, BorderLayout.NORTH);
+//        component.getParent().add(sp, BorderLayout.CENTER);
 
         searchField.addKeyListener(new KeyAdapter() {
             @Override
@@ -217,6 +226,9 @@ public class AllProjectsToolWindowFactory implements ToolWindowFactory {
             }
         });
 
+        ContentFactory contentFactory = ContentFactory.SERVICE.getInstance();
+        Content content = contentFactory.createContent(panel, "", false);
+        toolWindow.getContentManager().addContent(content);
     }
 
     /**
