@@ -2,6 +2,7 @@ package com.nes.intellij.plugin.ui;
 
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.ui.ComboBox;
+import com.intellij.openapi.util.IconLoader;
 import com.intellij.openapi.wm.ToolWindow;
 import com.intellij.openapi.wm.ToolWindowFactory;
 import com.intellij.ui.components.JBLabel;
@@ -20,12 +21,15 @@ import org.joda.time.format.DateTimeFormat;
 import org.joda.time.format.DateTimeFormatter;
 
 import javax.swing.*;
+import javax.swing.border.EmptyBorder;
 import javax.swing.event.ListDataListener;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 import javax.swing.table.TableModel;
 import javax.swing.table.TableRowSorter;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.io.*;
@@ -196,9 +200,25 @@ public class AllProjectsToolWindowFactory implements ToolWindowFactory {
 
         NonOpaquePanel filterPanel = new NonOpaquePanel();
 
-        filterPanel.add(new JLabel("Filter: "), BorderLayout.WEST);
+        Icon refreshIcon = IconLoader.getIcon("/icons/refresh.png");
+
+        JButton btn = new JButton(refreshIcon);
+        btn.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent arg0) {
+                loadDataFromSource(table_model, null);
+                table.updateUI();
+            }
+        });
+
+        JPanel butonPanel = new JPanel();
+        butonPanel.setLayout(new FlowLayout());
+        butonPanel.add(btn) ;
+        butonPanel.add(new JLabel("Filter: ")) ;
+
+        filterPanel.add(butonPanel, BorderLayout.WEST);
         filterPanel.add(searchField, BorderLayout.CENTER);
         filterPanel.add(rightPanel, BorderLayout.EAST);
+        filterPanel.setBorder(new EmptyBorder(10, 10, 10, 10));
 
 //        final Component component = toolWindow.getComponent();
 

@@ -127,11 +127,13 @@ public class AllProjectsProjectComponent implements ProjectComponent, BulkFileLi
                         || file.endsWith(".java")
                         || file.endsWith(".py")
                         || file.endsWith(".kt")
+                        || file.endsWith(".js")
+                        || file.endsWith(".html")
                         || file.endsWith(".mm")
                         || file.endsWith(".c")
                         || file.endsWith(".cpp")
                         || file.endsWith(".swift")
-                        || file.endsWith(".plist")
+                        || file.endsWith(".storyboard")
                         || file.endsWith(".m")
                         || file.endsWith(".h")))) {
 
