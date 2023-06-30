@@ -1,2 +1,2 @@
 # AllProjects
-Plugin for intellij idea, that helps to track all your projects in one place. With this plugin you will always know when and what you have done, even after week or month. Every programmer knows, that sometimes he has to answer to his manager what he has done at Wednesday, before a few week. Plugin works in most of JetBrain EDE.
+This is a plugin for IntelliJ IDEA that allows you to keep track of all your projects in one place. With this plugin, you can always recall what you accomplished and when, even after several weeks or months. Every programmer understands the occasional need to report to their manager about what they accomplished on a specific day weeks ago. This plugin is compatible with most of JetBrains' IDEs.
